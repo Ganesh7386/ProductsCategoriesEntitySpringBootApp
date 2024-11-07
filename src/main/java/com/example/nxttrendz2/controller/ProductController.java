@@ -34,8 +34,9 @@ public class ProductController {
     @PostMapping("/categories/products/")
     public Product addProductByGivenProduct(@RequestBody Product newProductData) {
         Product newAddedProduct = myProductJpaService.addProductByGivenProduct(newProductData);
+
         if (newAddedProduct == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND , "Category Id not found");
         }
         return newAddedProduct;
     }
@@ -60,8 +61,8 @@ public class ProductController {
 
     @GetMapping("/products/{productId}/category")
     public Category giveCategoryBasedOnProductId(@PathVariable int productId) {
-        Category existingCategory= myProductJpaService.giveCategoryBasedOnProductId(productId);
-        if(existingCategory == null) {
+        Category existingCategory = myProductJpaService.giveCategoryBasedOnProductId(productId);
+        if (existingCategory == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return existingCategory;

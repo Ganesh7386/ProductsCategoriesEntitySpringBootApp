@@ -39,6 +39,13 @@ public class ProductJpaService implements ProductRepository {
 
     @Override
     public Product addProductByGivenProduct(Product newProductData) {
+        Category categoryData = newProductData.getCategory();
+        int categoryId = categoryData.getId();
+        Category existingCategory = myCategoryJpaService.getCategoryBasedOnGivenId(categoryId);
+        if(existingCategory == null) {
+            return null;
+        }
+        newProductData.setCategory(existingCategory);
         Product newAddedProduct = myProductJpaRepository.save(newProductData);
         return newAddedProduct;
     }
@@ -81,7 +88,7 @@ public class ProductJpaService implements ProductRepository {
     @Override
     public Category giveCategoryBasedOnProductId(int productId) {
         Product existingProduct = myProductJpaRepository.findById(productId).get();
-        if(existingProduct == null) {
+        if (existingProduct == null) {
             return null;
         }
         Category existingCategory = existingProduct.getCategory();
