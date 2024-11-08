@@ -21,4 +21,6 @@ public interface ProductRepository {
     public ArrayList<Product> getListOfProductsByCategoryId(int categoryId);
 
     public ArrayList<String> getProductNamesByGivenCategoryId(int categoryId);
+
+    public long getCountOfProductsByGivenCategoryId(int categoryId);
 }

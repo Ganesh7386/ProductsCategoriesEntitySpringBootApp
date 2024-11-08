@@ -97,7 +97,7 @@ public class ProductJpaService implements ProductRepository {
 
     @Override
     public ArrayList<Product> getListOfProductsByCategoryId(int categoryId) {
-        List<Product> listOfProducts = myProductJpaRepository.findByCategory_Id(categoryId);
+        List<Product> listOfProducts = myProductJpaRepository.getListOfProductsBycategoryId(categoryId);
         ArrayList<Product> listOfProductsBelongToGivenCategoryId = new ArrayList<>(listOfProducts);
         return listOfProductsBelongToGivenCategoryId;
     }
@@ -107,6 +107,13 @@ public class ProductJpaService implements ProductRepository {
         List<String> listOfProductsFromDb = myProductJpaRepository.getProductNamesByCategoryId(categoryId);
         ArrayList<String> listOfProducts = new ArrayList<>(listOfProductsFromDb);
         return listOfProducts;
+    }
+
+    @Override
+    public long getCountOfProductsByGivenCategoryId(int categoryId) {
+        long countOfProductsBelongingToGivenCategoryId = myProductJpaRepository
+                .getCountOfProductsByCategoryId(categoryId);
+        return countOfProductsBelongingToGivenCategoryId;
     }
 
 }

@@ -81,4 +81,10 @@ public class ProductController {
         return listOfProductNames;
     }
 
+    @GetMapping("/products_count/{categoryId}")
+    public long getCountOfProductsByGivenCategoryId(@PathVariable int categoryId) {
+        long countOfProductsForGivenCategoryId = myProductJpaService.getCountOfProductsByGivenCategoryId(categoryId);
+        return countOfProductsForGivenCategoryId;
+    }
+
 }

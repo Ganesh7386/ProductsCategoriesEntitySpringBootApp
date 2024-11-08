@@ -10,8 +10,13 @@ import com.example.nxttrendz2.model.Product;
 
 @Repository
 public interface ProductJpaRepository extends JpaRepository<Product, Integer> {
-    List<Product> findByCategory_Id(Integer categoryId);
+
+    @Query("SELECT p from Product p where p.category.id = :categoryId")
+    List<Product> getListOfProductsBycategoryId(@Param("categoryId") Integer categoryId);
 
     @Query("SELECT p.name FROM Product p WHERE p.category.id = :categoryId")
     List<String> getProductNamesByCategoryId(@Param("categoryId") Integer categoryId);
+
+    @Query("SELECT COUNT(p) from Product p WHERE p.category.id = :categoryId")
+    long getCountOfProductsByCategoryId(@Param("categoryId") int categoryId);
 }
