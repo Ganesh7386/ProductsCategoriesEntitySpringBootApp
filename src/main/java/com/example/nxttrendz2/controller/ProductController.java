@@ -36,7 +36,7 @@ public class ProductController {
         Product newAddedProduct = myProductJpaService.addProductByGivenProduct(newProductData);
 
         if (newAddedProduct == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND , "Category Id not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category Id not found");
         }
         return newAddedProduct;
     }
@@ -67,4 +67,18 @@ public class ProductController {
         }
         return existingCategory;
     }
+
+    @GetMapping("/products_list/{categoryId}")
+    public ArrayList<Product> getListOfProductsFromGivenCategoryId(@PathVariable int categoryId) {
+        ArrayList<Product> listOfProductsBelongToGivenCategoryId = myProductJpaService
+                .getListOfProductsByCategoryId(categoryId);
+        return listOfProductsBelongToGivenCategoryId;
+    }
+
+    @GetMapping("/product_names/{categoryId}")
+    public ArrayList<String> getListOfProductNamesFromGivenCategoryId(@PathVariable int categoryId) {
+        ArrayList<String> listOfProductNames = myProductJpaService.getProductNamesByGivenCategoryId(categoryId);
+        return listOfProductNames;
+    }
+
 }

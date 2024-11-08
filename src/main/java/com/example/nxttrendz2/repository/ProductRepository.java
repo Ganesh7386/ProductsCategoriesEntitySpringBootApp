@@ -17,4 +17,8 @@ public interface ProductRepository {
     public Product deleteProductByGivenId(int productId);
 
     public Category giveCategoryBasedOnProductId(int productId);
+
+    public ArrayList<Product> getListOfProductsByCategoryId(int categoryId);
+
+    public ArrayList<String> getProductNamesByGivenCategoryId(int categoryId);
 }

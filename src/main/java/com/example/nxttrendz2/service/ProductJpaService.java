@@ -42,7 +42,7 @@ public class ProductJpaService implements ProductRepository {
         Category categoryData = newProductData.getCategory();
         int categoryId = categoryData.getId();
         Category existingCategory = myCategoryJpaService.getCategoryBasedOnGivenId(categoryId);
-        if(existingCategory == null) {
+        if (existingCategory == null) {
             return null;
         }
         newProductData.setCategory(existingCategory);
@@ -93,6 +93,20 @@ public class ProductJpaService implements ProductRepository {
         }
         Category existingCategory = existingProduct.getCategory();
         return existingCategory;
+    }
+
+    @Override
+    public ArrayList<Product> getListOfProductsByCategoryId(int categoryId) {
+        List<Product> listOfProducts = myProductJpaRepository.findByCategory_Id(categoryId);
+        ArrayList<Product> listOfProductsBelongToGivenCategoryId = new ArrayList<>(listOfProducts);
+        return listOfProductsBelongToGivenCategoryId;
+    }
+
+    @Override
+    public ArrayList<String> getProductNamesByGivenCategoryId(int categoryId) {
+        List<String> listOfProductsFromDb = myProductJpaRepository.getProductNamesByCategoryId(categoryId);
+        ArrayList<String> listOfProducts = new ArrayList<>(listOfProductsFromDb);
+        return listOfProducts;
     }
 
 }
